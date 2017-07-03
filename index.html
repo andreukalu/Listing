@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html ng-app="Listing">
+<head>
+<meta charset="UTF-8">
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+<body>
+
+<div >
+<div ng-view></div>
+</div>
+
+</body>
+<script>
+	var app = angular.module("Listing", ['ngRoute']);
+	app.config(function($routeProvider) {
+    $routeProvider
+    .when("/", {
+        templateUrl : "signin.html"
+    });
+});
+	app.controller('signinCtrl',function($scope){
+		
+	});
+
+</script>
+</html>
