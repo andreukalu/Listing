@@ -1,0 +1,14 @@
+<div ng-controller="signinCtrl">
+<form name="signupForm">
+<p>Username: <input type="text" name="username" ng-model="username" required></p>
+<span ng-messages="signupForm.username.$error" ng-messages-include="messages.html"></span>
+<p>Password: <input type="text" name="password" ng-model="password" required></p>
+<span ng-messages="signupForm.password.$error" ng-messages-include="messages.html"></span>
+<p>Repeat password: <input type="text" name="secondPassword" ng-model="secondpassword" compare-to="password" required></p>
+<span ng-messages="signupForm.secondPassword.$error" ng-messages-include="messages.html"></span>
+<p>Name: <input type="text" ng-model="name" required></p>
+<span ng-messages="signupForm.name.$error" ng-messages-include="messages.html"></span>
+<button href="#main">Sign in</button>
+<p ng-bind="response"></p>
+</form>
+</div>

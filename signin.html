@@ -1,5 +1,15 @@
-<div ng-controller="signinCrtrl">
-<p>Name: <input type="text" ></p>
-<p>Username: <input type="text" ></p>
-<button>Sign in</button>
+<div ng-controller="signinCtrl">
+<form name="signupForm">
+<p>Username: <input type="text" name="username" ng-model="signup.user.username" required></p>
+<span ng-messages="signupForm.username.$error" ng-messages-include="messages.html"></span>
+<p>Password: <input type="text" name="password" ng-model="signup.user.password" required></p>
+<span ng-messages="signupForm.password.$error" ng-messages-include="messages.html"></span>
+<p>Repeat password: <input type="text" name="secondPassword" ng-model="signup.user.secondpassword" compare-to="signup.user.password" required></p>
+<span ng-show="signupForm.secondPassword.$validation">{{signup.user.secondpassword}}</span>
+<span ng-messages="signupForm.secondPassword.$error" ng-messages-include="messages.html"></span>
+<p>Name: <input type="text" ng-model="signup.user.name" required compare-to="signup.user.password"></p>
+<span ng-messages="signupForm.name.$error" ng-messages-include="messages.html"></span>
+<button href="#main">Sign in</button>
+<p ng-bind="response"></p>
+</form>
 </div>

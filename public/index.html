@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html ng-app="Listing">
+<head>
+<meta charset="UTF-8">
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+<script src="https://code.angularjs.org/1.3.0-rc.2/angular-messages.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<body>
+
+<div >
+<div ng-view></div>
+</div>
+
+</body>
+<script>
+	var app = angular.module("Listing", ['ngRoute','ngMessages']);
+	app.config(function($routeProvider) {
+    $routeProvider
+    .when("/", {
+        templateUrl : "signin.html",
+        controller: "signinCtrl"
+    });
+});
+	app.controller('signinCtrl',function($scope,$http){
+		$scope.newUser = function(){$http({
+				method: "GET",
+				url: "/users",
+				headers: {
+   					'Content-Type': undefined
+ 				},
+ 				data: {
+ 					username:$scope.username, password:$scope.password, name:$scope.name
+ 				}
+			}).then(function success(response){
+				$scope.response = "success";
+			}, function myError(response) {
+    	    $scope.response = "failed";
+    		});
+		
+		}
+	});
+
+	app.directive('compareTo',function(){
+		return {
+    		require: 'ngModel',
+    		scope: {
+    			passwordConfirm: "=compareTo"
+    		},
+    		link: function(scope, element, attr, mCtrl) {
+      			mCtrl.$validators.compareTo = function(modelValue){
+      				return modelValue==scope.passwordConfirm;
+      			};
+
+      			scope.$watch("passwordConfirm", function(){
+      				mCtrl.$validate();
+      			});
+
+      			scope.$watch("signup.user.password", function(){
+      				mCtrl.$validate();
+      			})
+    		}
+		}
+	});
+
+</script>
+</html>
